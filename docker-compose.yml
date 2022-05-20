@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  db:
+    image: "mongo:5.0.2"
+    ports:
+      - "27017:27017"
+
+  back-end:
+    build: ./back-end
+    environment:
+      - MONGO_CONNECTION_STRING=mongodb://db:27017
+    restart: always
+    ports:
+      - "3002:3000"
+    depends_on:
+      - db
+
+  front-end:
+    build: ./front-end
+    environment:
+      - REACT_APP_BACK_END_API=http://localhost:3002
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - back-end
