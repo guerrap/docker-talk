@@ -27,9 +27,9 @@ fastify.get("/raccoons", async (_, reply) => {
 });
 
 fastify.delete("/raccoons", async (_, reply) => {
-  const raccoons = await databaseClient.deleteRaccoons();
+  await databaseClient.deleteRaccoons();
 
-  reply.status(200).send(raccoons);
+  reply.status(200).send();
 });
 
 fastify.listen(3000, "0.0.0.0", (error, address) => {

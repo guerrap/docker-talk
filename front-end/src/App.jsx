@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
-import { Center, Slider, Stack, TextInput, Button } from "@mantine/core";
+import {
+  Center,
+  Slider,
+  Stack,
+  TextInput,
+  Title,
+  InputWrapper,
+  Button,
+} from "@mantine/core";
 
 import Racoon from "./components/raccoon";
 import { config } from "./config";
@@ -59,13 +67,18 @@ function App() {
   return (
     <Center style={{ height: "80vh" }}>
       <Stack style={{ width: "270px" }}>
+        <Title align={"center"} order={1}>
+          Raccoons
+        </Title>
         <TextInput
           label={"Name"}
           placeholder={"name"}
           value={raccoon.name}
           onChange={onNameChange}
         />
-        <Slider value={raccoon.weight} onChange={onWeightChange} />
+        <InputWrapper label={"Weight"}>
+          <Slider value={raccoon.weight} onChange={onWeightChange} />
+        </InputWrapper>
         <Button onClick={onCreate}>Create</Button>
         <Stack>
           {raccoons.map((raccoon) => (

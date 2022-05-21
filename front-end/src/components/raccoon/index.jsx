@@ -7,7 +7,15 @@ import "./style.css";
 const Racoon = ({ name, weight }) => (
   <Box className="box">
     <Text size={"md"}>
-      Raccoon {name} weights {weight} kg
+      Raccoon{" "}
+      <Text weight={700} component={"span"}>
+        {name}
+      </Text>{" "}
+      weights{" "}
+      <Text weight={700} component={"span"}>
+        {weight}
+      </Text>
+      kg
     </Text>
   </Box>
 );
