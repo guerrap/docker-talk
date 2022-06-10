@@ -18,32 +18,32 @@ const database = async () => {
   const client = await getConnection();
 
   return {
-    insertRaccoon: async ({ name, weight }) => {
+    insertStuff: async ({ name, weight }) => {
       try {
         await client
-          .db("animals")
-          .collection("raccoons")
+          .db("warehouse")
+          .collection("stuff")
           .insertOne({ name, weight });
       } catch (error) {
-        throw new Error("Raccoon insert failed");
+        throw new Error("stuff insert failed");
       }
     },
-    getRaccoons: async () => {
+    getStuff: async () => {
       try {
         return await client
-          .db("animals")
-          .collection("raccoons")
+          .db("warehouse")
+          .collection("stuff")
           .find()
           .toArray();
       } catch (error) {
-        throw new Error("Raccoons get failed");
+        throw new Error("stuff get failed");
       }
     },
-    deleteRaccoons: async () => {
+    deleteStuff: async () => {
       try {
-        await client.db("animals").collection("raccoons").deleteMany();
+        await client.db("warehouse").collection("stuff").deleteMany();
       } catch (error) {
-        throw new Error("Raccoons delete failed");
+        throw new Error("stuff delete failed");
       }
     },
   };

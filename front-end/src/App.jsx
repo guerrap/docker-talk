@@ -9,26 +9,26 @@ import {
   Button,
 } from "@mantine/core";
 
-import Racoon from "./components/raccoon";
+import Stuff from "./components/stuff";
 import { config } from "./config";
 
 function App() {
-  const [raccoons, setRaccoons] = useState([]);
-  const [raccoon, setRaccoon] = useState({ name: "", weight: 0 });
+  const [stuffs, setStuffs] = useState([]);
+  const [stuff, setStuff] = useState({ name: "", weight: 0 });
 
   useEffect(() => {
-    fetchRaccoons();
+    fetchStuffs();
   }, []);
 
-  const fetchRaccoons = async () => {
-    const response = await fetch(`${config.backEndApi}/raccoons`);
-    const raccoons = await response.json();
+  const fetchStuffs = async () => {
+    const response = await fetch(`${config.backEndApi}/stuffs`);
+    const stuffs = await response.json();
 
-    setRaccoons(raccoons);
+    setStuffs(stuffs);
   };
 
-  const createRaccoon = async ({ name, weight }) => {
-    await fetch(`${config.backEndApi}/raccoons`, {
+  const createStuff = async ({ name, weight }) => {
+    await fetch(`${config.backEndApi}/stuffs`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -38,55 +38,51 @@ function App() {
     });
   };
 
-  const deleteRaccoons = async () => {
-    await fetch(`${config.backEndApi}/raccoons`, {
+  const deleteStuffs = async () => {
+    await fetch(`${config.backEndApi}/stuffs`, {
       method: "DELETE",
     });
   };
 
   const onNameChange = (event) => {
-    setRaccoon((state) => ({ ...state, name: event.target.value }));
+    setStuff((state) => ({ ...state, name: event.target.value }));
   };
 
   const onWeightChange = (value) => {
-    setRaccoon((state) => ({ ...state, weight: value }));
+    setStuff((state) => ({ ...state, weight: value }));
   };
 
   const onCreate = async () => {
-    setRaccoon({ name: "", weight: 0 });
+    setStuff({ name: "", weight: 0 });
 
-    await createRaccoon({ name: raccoon.name, weight: raccoon.weight });
-    await fetchRaccoons();
+    await createStuff({ name: stuff.name, weight: stuff.weight });
+    await fetchStuffs();
   };
 
   const onClear = async () => {
-    await deleteRaccoons();
-    await fetchRaccoons();
+    await deleteStuffs();
+    await fetchStuffs();
   };
 
   return (
     <Center style={{ height: "80vh" }}>
       <Stack style={{ width: "270px" }}>
         <Title align={"center"} order={1}>
-          Raccoons
+          Stuffs
         </Title>
         <TextInput
           label={"Name"}
           placeholder={"name"}
-          value={raccoon.name}
+          value={stuff.name}
           onChange={onNameChange}
         />
         <InputWrapper label={"Weight"}>
-          <Slider value={raccoon.weight} onChange={onWeightChange} />
+          <Slider value={stuff.weight} onChange={onWeightChange} />
         </InputWrapper>
         <Button onClick={onCreate}>Create</Button>
         <Stack>
-          {raccoons.map((raccoon) => (
-            <Racoon
-              key={raccoon._id}
-              name={raccoon.name}
-              weight={raccoon.weight}
-            />
+          {stuffs.map((stuff) => (
+            <Stuff key={stuff._id} name={stuff.name} weight={stuff.weight} />
           ))}
         </Stack>
         <Button onClick={onClear} color={"red"}>

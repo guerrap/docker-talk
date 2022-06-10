@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 
 import "./style.css";
 
-const Racoon = ({ name, weight }) => (
+const Stuff = ({ name, weight }) => (
   <Box className="box">
     <Text size={"md"}>
-      Raccoon{" "}
+      Stuff{" "}
       <Text weight={700} component={"span"}>
         {name}
       </Text>{" "}
@@ -20,9 +20,9 @@ const Racoon = ({ name, weight }) => (
   </Box>
 );
 
-Racoon.propTypes = {
+Stuff.propTypes = {
   name: PropTypes.string,
   weight: PropTypes.number,
 };
 
-export default Racoon;
+export default Stuff;

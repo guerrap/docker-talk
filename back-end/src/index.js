@@ -11,8 +11,8 @@ fastify.register(cors, {
 
 const databaseClient = await database();
 
-fastify.post("/raccoons", async (request, reply) => {
-  await databaseClient.insertRaccoon({
+fastify.post("/stuffs", async (request, reply) => {
+  await databaseClient.insertStuff({
     name: request.body.name,
     weight: request.body.weight,
   });
@@ -20,14 +20,14 @@ fastify.post("/raccoons", async (request, reply) => {
   reply.status(201).send();
 });
 
-fastify.get("/raccoons", async (_, reply) => {
-  const raccoons = await databaseClient.getRaccoons();
+fastify.get("/stuffs", async (_, reply) => {
+  const stuffs = await databaseClient.getStuff();
 
-  reply.status(200).send(raccoons);
+  reply.status(200).send(stuffs);
 });
 
-fastify.delete("/raccoons", async (_, reply) => {
-  await databaseClient.deleteRaccoons();
+fastify.delete("/stuffs", async (_, reply) => {
+  await databaseClient.deleteStuff();
 
   reply.status(200).send();
 });
